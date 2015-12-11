@@ -96,6 +96,11 @@ namespace com.healthmarketscience.api.samples.dotnet
         /// <returns></returns>
         internal static string CallWebService(string url, string restMethod = "GET", string secret = null, string signature = null, string postData = null)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+				        | SecurityProtocolType.Tls11
+				        | SecurityProtocolType.Tls12
+				        | SecurityProtocolType.Ssl3;
+        	
             if (signature == null)
             {
                 // generate default signature - url needs to be without the signature and without the server/host
@@ -107,7 +112,6 @@ namespace com.healthmarketscience.api.samples.dotnet
             }
 
             url = ApiConfiguration.BasePath + url + "&signature=" + signature;
-
 
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             request.Method = restMethod;
