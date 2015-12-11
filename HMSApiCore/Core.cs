@@ -43,6 +43,14 @@ namespace com.healthmarketscience.api.samples.dotnet
             ApiConfiguration = config;
         }
 
+        public static void EnableSecurityProtocol(SecurityProtocolType type = SecurityProtocolType.Tls
+					        | SecurityProtocolType.Tls11
+					        | SecurityProtocolType.Tls12
+					        | SecurityProtocolType.Ssl3) {
+
+    		ServicePointManager.SecurityProtocol |= type;
+        }
+        
         #region UrlBuilders
         internal static string HMS_API_SEARCH_WEBSERVICE_PATH()
         {
@@ -96,11 +104,6 @@ namespace com.healthmarketscience.api.samples.dotnet
         /// <returns></returns>
         internal static string CallWebService(string url, string restMethod = "GET", string secret = null, string signature = null, string postData = null)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-				        | SecurityProtocolType.Tls11
-				        | SecurityProtocolType.Tls12
-				        | SecurityProtocolType.Ssl3;
-        	
             if (signature == null)
             {
                 // generate default signature - url needs to be without the signature and without the server/host
