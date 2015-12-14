@@ -12,6 +12,7 @@ namespace com.healthmarketscience.api.samples.dotnet
         public void Init()
         {
             Core.SetConfiguration(TestConstants.TEST_API_CONFIGURATION);
+            Core.EnableSecurityProtocol();
         }
 
         [TestMethod]
