@@ -43,6 +43,14 @@ namespace com.healthmarketscience.api.samples.dotnet
             ApiConfiguration = config;
         }
 
+        public static void EnableSecurityProtocol(SecurityProtocolType type = SecurityProtocolType.Tls
+					        | SecurityProtocolType.Tls11
+					        | SecurityProtocolType.Tls12
+					        | SecurityProtocolType.Ssl3) {
+
+    		ServicePointManager.SecurityProtocol |= type;
+        }
+        
         #region UrlBuilders
         internal static string HMS_API_SEARCH_WEBSERVICE_PATH()
         {
@@ -107,7 +115,6 @@ namespace com.healthmarketscience.api.samples.dotnet
             }
 
             url = ApiConfiguration.BasePath + url + "&signature=" + signature;
-
 
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             request.Method = restMethod;
