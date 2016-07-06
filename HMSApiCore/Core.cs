@@ -68,7 +68,7 @@ namespace com.healthmarketscience.api.samples.dotnet
             get
             {
                 return new Dictionary<string, string>() {
-                    { "timestamp",  (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() },
+                    { "timestamp", ((long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds).ToString() },
                     { "key", DEFAULT_KEY }
                 };
             }
