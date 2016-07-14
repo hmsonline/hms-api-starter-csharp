@@ -16,7 +16,7 @@ namespace com.healthmarketscience.api.samples.dotnet
         internal static IDictionary<string, string> GetSearchParameters()
         {
             return new Dictionary<string, string>() {
-                { "timestamp",  (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond).ToString() },
+                { "timestamp",  ((long)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds).ToString()},
                 { "key", TestConstants.DEFAULT_KEY }
             };
         }
